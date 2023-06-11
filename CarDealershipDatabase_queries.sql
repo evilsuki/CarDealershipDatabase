@@ -76,3 +76,12 @@ ON v.VIN = i.VIN
 INNER JOIN dealerships AS d
 ON i.dealership_id = d.dealership_id
 WHERE v.sold = 1; 
+
+/***********************************************
+8. Interesting: List all car that already lease
+***********************************************/
+
+SELECT v.*
+FROM vehicles AS v
+INNER JOIN lease_contracts AS l 
+ON v.VIN = l.VIN
