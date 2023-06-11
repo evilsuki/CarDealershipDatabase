@@ -4,33 +4,33 @@ USE cardealership;
 1. Get all dealerships
 **********************/
 
-select *
-from dealerships;
+SELECT *
+FROM dealerships;
 
 /**********************************************
 2. Find all vehicles for a specific dealership
 **********************************************/
 
-select v.*
-from vehicles as v
-inner join inventory as i
-on v.VIN = i.VIN
-where i.dealership_id = 2;
+SELECT v.*
+FROM vehicles AS v
+INNER JOIN inventory AS i
+ON v.VIN = i.VIN
+WHERE i.dealership_id = 2;
 
 /********************
 3. Find a car by VIN
 ********************/
 
-select *
-from vehicles
-where VIN = '7LMFU28575LJ12382';
+SELECT *
+FROM vehicles
+WHERE VIN = '7LMFU28575LJ12382';
 
 /*************************************************************
 4. Find the dealership where a certain car is located, by VIN
 *************************************************************/
 
 SELECT d.*
-FROM dealerships d
+FROM dealerships AS d
 INNER JOIN inventory AS i 
 ON d.dealership_id = i.dealership_id
 WHERE i.VIN = '7LMFU28575LJ12382';
@@ -40,7 +40,7 @@ WHERE i.VIN = '7LMFU28575LJ12382';
 ****************************************************/
 
 SELECT d.*
-FROM dealerships d
+FROM dealerships AS d
 INNER JOIN inventory AS i 
 ON d.dealership_id = i.dealership_id
 INNER JOIN vehicles AS v 
@@ -53,7 +53,7 @@ WHERE v.vehicle_make = 'Honda'
 ****************************************************************************/
 
 SELECT s.*
-FROM sales_contracts s
+FROM sales_contracts AS s
 INNER JOIN vehicles AS v 
 ON s.VIN = v.VIN
 INNER JOIN inventory AS i 
@@ -63,3 +63,16 @@ ON i.dealership_id = d.dealership_id
 WHERE d.dealership_id = 2
   AND s.sale_date >= '2023-05-01'
   AND s.sale_date <= '2023-07-01';
+ 
+ /*******************************************************************
+7. Interesting: List all car that already sold with their dealership
+********************************************************************/
+ 
+SELECT v.*
+	, d.*
+FROM vehicles AS v
+INNER JOIN inventory AS i
+ON v.VIN = i.VIN
+INNER JOIN dealerships AS d
+ON i.dealership_id = d.dealership_id
+WHERE v.sold = 1; 

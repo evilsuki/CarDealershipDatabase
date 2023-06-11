@@ -16,58 +16,58 @@ STEP 2: CREATE TABLES
 
 CREATE TABLE dealerships (
   dealership_id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(50),
-  address VARCHAR(50),
-  phone VARCHAR(12),
+  name VARCHAR(50) NOT NULL,
+  address VARCHAR(50) NOT NULL,
+  phone VARCHAR(12) NOT NULL,
   PRIMARY KEY(dealership_id)
 );
 
 CREATE TABLE vehicles (
-  VIN VARCHAR(17),
-  vehicle_type VARCHAR(20),
-  vehicle_make VARCHAR(10),
-  vehicle_model VARCHAR(10),
-  vehicle_color VARCHAR(10),
-  vehicle_year VARCHAR(4),
-  vehicle_price DECIMAL(10,2),
-  vehicle_odometer INT,
-  sold BOOLEAN,
+  VIN VARCHAR(17) NOT NULL,
+  vehicle_type VARCHAR(20) NOT NULL,
+  vehicle_make VARCHAR(10) NOT NULL,
+  vehicle_model VARCHAR(10) NOT NULL,
+  vehicle_color VARCHAR(10) NOT NULL,
+  vehicle_year VARCHAR(4) NOT NULL,
+  vehicle_price DECIMAL(10,2) NOT NULL,
+  vehicle_odometer INT NOT NULL,
+  sold BOOLEAN NOT NULL,
   PRIMARY KEY(VIN)
 );
 
 CREATE TABLE inventory (
-  dealership_id INT,
-  VIN VARCHAR(17),
+  dealership_id INT NOT NULL,
+  VIN VARCHAR(17) NOT NULL,
   FOREIGN KEY (dealership_id) REFERENCES dealerships(dealership_id),
   FOREIGN KEY (VIN) REFERENCES vehicles(VIN)
 );
 
 CREATE TABLE sales_contracts (
   sale_id INT NOT NULL AUTO_INCREMENT,
-  VIN VARCHAR(17),
-  sale_date DATETIME,
-  customer_firstName VARCHAR(10),
-  customer_lastName VARCHAR(10),
-  customer_phone VARCHAR(12),
-  customer_email VARCHAR(30),
-  sale_tax DECIMAL (10,2),
-  sale_price DECIMAL (10,2),
-  sale_payment DECIMAL(10,2),
+  VIN VARCHAR(17) NOT NULL,
+  sale_date DATETIME NOT NULL,
+  customer_firstName VARCHAR(10) NOT NULL,
+  customer_lastName VARCHAR(10) NOT NULL,
+  customer_phone VARCHAR(12) NOT NULL,
+  customer_email VARCHAR(30) NOT NULL,
+  sale_tax DECIMAL (10,2) NOT NULL,
+  sale_price DECIMAL (10,2) NOT NULL,
+  sale_payment DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (sale_id),
   FOREIGN KEY (VIN) REFERENCES vehicles(VIN)
 );
 
 CREATE TABLE lease_contracts (
   lease_id INT NOT NULL AUTO_INCREMENT,
-  VIN VARCHAR(17),
-  lease_date DATETIME,
-  lease_lenght INT,  -- count by month.
-  customer_firstName VARCHAR(10),
-  customer_lastName VARCHAR(10),
-  customer_phone VARCHAR(12),
-  customer_email VARCHAR(30),
-  lease_price DECIMAL(10,2),
-  lease_payment DECIMAL(10,2),
+  VIN VARCHAR(17) NOT NULL,
+  lease_date DATETIME NOT NULL,
+  lease_lenght INT NOT NULL,  -- count by month.
+  customer_firstName VARCHAR(10) NOT NULL,
+  customer_lastName VARCHAR(10) NOT NULL,
+  customer_phone VARCHAR(12) NOT NULL,
+  customer_email VARCHAR(30) NOT NULL,
+  lease_price DECIMAL(10,2) NOT NULL,
+  lease_payment DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (lease_id),
   FOREIGN KEY (VIN) REFERENCES vehicles(VIN)
 );
